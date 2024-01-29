@@ -1,0 +1,56 @@
+version: "2"
+services:
+  db:
+    image: mariadb
+    environment:
+        - MYSQL_ROOT_PASSWORD=abacaba
+        - TZ=Europe/Moscow
+    volumes:
+        # - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        - ./data:/var/lib/mysql
+    ports:
+        - 4306:3306
+    restart: always
+    networks:
+      - net
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+        - PMA_HOST=db
+        - PMA_USER=root
+        - PMA_PASSWORD=abacaba
+    restart: always
+    ports:
+        - 88:80
+    links:
+        - db
+    networks:
+      - net
+
+  backend:
+    image: notpastebin/backend
+    container_name: backend
+    depends_on:
+      - db
+    ports:
+      - 8090:8090
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://db:3306/notpastebin
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=abacaba
+    networks: 
+      - net
+
+  frontend:
+    image: notpastebin/frontend
+    container_name: frontend
+
+    ports:
+      - 8080:8080
+    networks: 
+      - net
+
+networks: 
+  net:
+    driver: bridge
