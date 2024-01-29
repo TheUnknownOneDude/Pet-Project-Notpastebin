@@ -1,5 +1,5 @@
 # Pet-Project-Notpastebin
-My attempt to create a somewhat working copy of pastebin
+Моя попытка создать хоть сколько-то работающую копию Pastebin
 # Notpastebin
 Notpastebin - это моя персональная реализация приложения, аналогичного Pastebin. Он позволяет пользователям делиться и хранить текстовый контент на определенный срок. Этот проект создан с использованием фронтенда на Vue.js и бэкенда на Java с использованием Spring Boot.
 
