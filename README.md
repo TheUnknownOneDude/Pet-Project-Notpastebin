@@ -21,3 +21,7 @@ Vue.js
 ## Бэкенд:
 
 Java Spring Boot
+
+## БД:
+
+В качестве СУБД использовал MariaDB
